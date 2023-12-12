@@ -36,3 +36,5 @@ C:\Users\dougl\OneDrive\Área de Trabalho\POO\AplicativoDeComida\obj\Debug\net7.
 C:\Users\dougl\OneDrive\Área de Trabalho\POO\AplicativoDeComida\obj\Debug\net7.0\AplicativoDeComida.pdb
 C:\Users\dougl\OneDrive\Área de Trabalho\POO\AplicativoDeComida\obj\Debug\net7.0\AplicativoDeComida.genruntimeconfig.cache
 C:\Users\dougl\OneDrive\Área de Trabalho\POO\AplicativoDeComida\obj\Debug\net7.0\ref\AplicativoDeComida.dll
+C:\Users\dougl\OneDrive\Área de Trabalho\POO\AplicativoDeComida\bin\Debug\net7.0\Spectre.Console.dll
+C:\Users\dougl\OneDrive\Área de Trabalho\POO\AplicativoDeComida\obj\Debug\net7.0\AplicativoDeComida.sourcelink.json

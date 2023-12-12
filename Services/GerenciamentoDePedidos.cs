@@ -33,6 +33,7 @@ public class GerenciamentoDePedidos
             }
         }
 
+        
         // Calcula o total do pedido com base nos itens de menu selecionados
         decimal total = 0;
         foreach (var item in itensMenu)
@@ -51,6 +52,11 @@ public class GerenciamentoDePedidos
         };
 
         _pedidoRepositoryMySQL.Inserir(novoPedido);
+
+    }
+    public List<ItemMenu> ObterItensDisponiveisNoRestaurante(int restauranteId)
+    {
+        return _itemMenuRepositoryMySQL.ObterTodosItensMenu(restauranteId);
     }
 
 }

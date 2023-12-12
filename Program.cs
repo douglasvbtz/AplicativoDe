@@ -23,6 +23,8 @@ namespace AplicativoDeComida
                 var autenticacaoCliente = new AutenticacaoCliente(context);
                 var autenticacaoRestaurate = new AutenticacaoRestaurante(context);
                 var autenticacaoRestaurante = new AutenticacaoRestaurante(context);
+                GerenciamentoDePedidos gerenciamentoDePedidos = new GerenciamentoDePedidos(context);
+
 
 
                 int opcao = -1;
@@ -69,11 +71,6 @@ namespace AplicativoDeComida
                                         List<Restaurante> restaurantes = gerenciamentoDeRestaurante.ObterTodosRestaurantes();
                                         if (restaurantes != null && restaurantes.Any())
                                         {
-                                            foreach (var restaurante in restaurantes)
-                                            {
-                                                //Console.WriteLine($"ID: {restaurante.RestauranteId} - Nome: {restaurante.Nome}");
-                                            }
-
                                             Console.Write("Digite o ID do restaurante desejado: ");
                                             if (int.TryParse(Console.ReadLine(), out int restauranteId))
                                             {
@@ -83,7 +80,7 @@ namespace AplicativoDeComida
                                                 {
                                                     Console.WriteLine($"Restaurante escolhido: {restauranteEscolhido.Nome}");
                                                     // Utilize o restaurante escolhido conforme necessário
-                                                    List<ItemMenu> itensDoRestaurante = gerenciamenoDeItemMenu.ObterTodosItensMenu();
+                                                    List<ItemMenu> itensDoRestaurante = gerenciamenoDeItemMenu.ObterTodosItensMenu(restauranteId);
                                                     if (itensDoRestaurante != null && itensDoRestaurante.Any())
                                                     {
                                                         Console.WriteLine("Itens do menu disponíveis:");
@@ -92,9 +89,27 @@ namespace AplicativoDeComida
                                                             string precoFormatado = itemMenu.Preco.ToString("F2");
                                                             Console.WriteLine($"ID: {itemMenu.ItemMenuId} - Nome: {itemMenu.Nome} - Descrição: {itemMenu.Descricao} - Preço: {precoFormatado}");
                                                             // Mostrar outros detalhes do item do menu, se necessário
-
-
                                                         }
+                                                        // Permitir ao cliente selecionar itens para fazer um pedido
+                                                        Console.WriteLine("Selecione os IDs dos itens que deseja pedir (separados por vírgula):");
+                                                        string inputItens = Console.ReadLine();
+                                                        List<int> itensSelecionados = inputItens.Split(',').Select(int.Parse).ToList();
+                                                        // Verificação se existem itens selecionados
+                                                        if (itensSelecionados.Any())
+                                                        {
+                                                            // Pedir o endereço de entrega após selecionar os itens
+                                                            Console.WriteLine("Digite o endereço de entrega:");
+                                                            string enderecoDoCliente = Console.ReadLine();
+
+                                                            // Criar o pedido com os itens selecionados e o endereço informado
+                                                            gerenciamentoDePedidos.CriarPedido(clienteLogado.ClienteId.ToString(), itensSelecionados, enderecoDoCliente);
+                                                            Console.WriteLine("Pedido realizado com sucesso!");
+                                                        }
+                                                        else
+                                                        {
+                                                            Console.WriteLine("Nenhum item selecionado. Pedido não realizado.");
+                                                        }
+
                                                     }
                                                     else
                                                     {

@@ -108,9 +108,9 @@ namespace AplicativoDeComida.Services
             return _itemMenuRepository.ObterPorId(id);
         }
 
-        public List<ItemMenu> ObterTodosItensMenu()
+        public List<ItemMenu> ObterTodosItensMenu(int restauranteId)
         {
-            return _itemMenuRepository.ObterTodos();
+            return _context.ItensMenu.Where(item => item.RestauranteId == restauranteId).ToList();
         }
 
         // Outros métodos do GerenciamentoDeItemMenu conforme necessário

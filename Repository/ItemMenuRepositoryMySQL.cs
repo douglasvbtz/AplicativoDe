@@ -41,6 +41,11 @@ namespace AplicativoDeComida.Controller
                 _context.SaveChanges();
             }
         }
+        public List<ItemMenu> ObterTodosItensMenu(int restauranteId)
+        {
+            // Lógica para obter todos os itens de menu de um restaurante específico
+            return _context.ItensMenu.Where(item => item.RestauranteId == restauranteId).ToList();
+        }
 
         public ItemMenu ObterPorId(int? id)
         {
