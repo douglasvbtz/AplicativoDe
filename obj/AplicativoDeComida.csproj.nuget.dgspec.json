@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dougl\\OneDrive\\Área de Trabalho\\POO\\AplicativoDeComida\\AplicativoDeComida.csproj": {}
+    "C:\\Users\\Gouveia\\Desktop\\AplicativoDeComida\\AplicativoDeComida.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dougl\\OneDrive\\Área de Trabalho\\POO\\AplicativoDeComida\\AplicativoDeComida.csproj": {
+    "C:\\Users\\Gouveia\\Desktop\\AplicativoDeComida\\AplicativoDeComida.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dougl\\OneDrive\\Área de Trabalho\\POO\\AplicativoDeComida\\AplicativoDeComida.csproj",
+        "projectUniqueName": "C:\\Users\\Gouveia\\Desktop\\AplicativoDeComida\\AplicativoDeComida.csproj",
         "projectName": "AplicativoDeComida",
-        "projectPath": "C:\\Users\\dougl\\OneDrive\\Área de Trabalho\\POO\\AplicativoDeComida\\AplicativoDeComida.csproj",
-        "packagesPath": "C:\\Users\\dougl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dougl\\OneDrive\\Área de Trabalho\\POO\\AplicativoDeComida\\obj\\",
+        "projectPath": "C:\\Users\\Gouveia\\Desktop\\AplicativoDeComida\\AplicativoDeComida.csproj",
+        "packagesPath": "C:\\Users\\Gouveia\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gouveia\\Desktop\\AplicativoDeComida\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dougl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Gouveia\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -80,6 +81,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"

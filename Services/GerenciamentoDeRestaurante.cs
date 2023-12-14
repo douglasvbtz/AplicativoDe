@@ -1,6 +1,7 @@
 ﻿using AplicativoDeComida.Controller;
 using AplicativoDeComida.Data;
 using AplicativoDeComida.Modelos;
+using Spectre.Console;
 
 namespace AplicativoDeComida.Services
 {
@@ -73,47 +74,6 @@ namespace AplicativoDeComida.Services
             }
         }
 
-        public class AutenticacaoRestaurante
-        {
-            private readonly RestauranteRepositoryMySQL _restauranteRepositoryMySQL;
-
-            public AutenticacaoRestaurante(AppDbContext context)
-            {
-                _restauranteRepositoryMySQL = new RestauranteRepositoryMySQL(context);
-            }
-
-            public Restaurante ValidarRestaurante()
-            {
-                string email, senha;
-                Restaurante restaurante = null;
-
-                Console.WriteLine("Digite seu e-mail:");
-                email = Console.ReadLine();
-
-                Console.WriteLine("Digite sua senha:");
-                senha = Console.ReadLine();
-
-                // Verifica se o cliente existe na base de dados com o email fornecido
-                restaurante = _restauranteRepositoryMySQL.ExisteNaBaseDeDados("Cliente", "email", email);
-
-                if (restaurante == null)
-                {
-                    Console.WriteLine("E-mail não cadastrado!");
-                    return null;
-                }
-
-                if (restaurante.senha != senha)
-                {
-                    Console.WriteLine("Senha incorreta!");
-                    return null;
-                }
-
-                Console.WriteLine("Login bem-sucedido!");
-                return restaurante;
-            }
-        }
-
-
         public void AtualizarRestaurante(int id, Restaurante restaurante)
         {
             _restauranteRepository.Atualizar(id, restaurante);
@@ -134,24 +94,67 @@ namespace AplicativoDeComida.Services
         {
             var restaurantes = _restauranteRepository.ObterTodos();
 
-            if (restaurantes != null && restaurantes.Any())
-            {
-                Console.WriteLine("Lista de restaurantes disponíveis:");
-                foreach (var restaurante in restaurantes)
-                {
-                    Console.WriteLine($"ID: {restaurante.RestauranteId} - Nome: {restaurante.Nome}");
-
-                }
-            }
-            else
+            // if (restaurantes != null && restaurantes.Any())
+            // {
+            //     Console.WriteLine("restaurante de restaurantes disponíveis:");
+            //     foreach (var restaurante in restaurantes)
+            //     {
+            //         Console.WriteLine($"ID: {restaurante.RestauranteId} - Nome: {restaurante.Nome}");
+            //
+            //     }
+            // }
+            if (!restaurantes.Any())
             {
                 Console.WriteLine("Nenhum restaurante disponível no momento.");
+                return new List<Restaurante>();
             }
 
             return restaurantes;
         }
 
 
-        // Outros métodos do GerenciamentoDeRestaurante conforme necessário
+        public Restaurante ValidarRestaurante()
+        {
+            string email, senha;
+            Restaurante restaurante = null;
+
+            Console.WriteLine("Digite seu e-mail:");
+            email = Console.ReadLine();
+
+            Console.WriteLine("Digite sua senha:");
+            senha = Console.ReadLine();
+
+            // Verifica se o cliente existe na base de dados com o email fornecido
+            restaurante = _restauranteRepository.ExisteNaBaseDeDados("Cliente", "email", email);
+
+            if (restaurante == null)
+            {
+                Console.WriteLine("E-mail não cadastrado!");
+                return null;
+            }
+
+            if (restaurante.senha != senha)
+            {
+                Console.WriteLine("Senha incorreta!");
+                return null;
+            }
+
+            Console.WriteLine("Login bem-sucedido!");
+            return restaurante;
+        }
+        
+        public Restaurante EscolherRestaurante()
+        {
+            var restaurantes = ObterTodosRestaurantes();
+        
+            Console.WriteLine("\nrestaurantes:");
+
+            var selection = AnsiConsole.Prompt(new SelectionPrompt<Restaurante>()
+                .Title("Escolha uma restaurante")
+                .AddChoices(restaurantes)
+                .UseConverter(restaurante => $"{restaurante.RestauranteId}: {restaurante.Nome}"));
+
+            return selection;
+        }
     }
 }
