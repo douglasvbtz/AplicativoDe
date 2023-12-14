@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using AplicativoDeComida.Modelos;
 using AplicativoDeComida.Data;
+using Spectre.Console;
 
 namespace AplicativoDeComida.Services
 {
@@ -111,30 +112,56 @@ namespace AplicativoDeComida.Services
         
         public Cliente ValidarCliente()
         {
-            string email, senha;
             Cliente cliente = null;
-
-            Console.WriteLine("Digite seu e-mail:");
-            email = Console.ReadLine();
-
-            Console.WriteLine("Digite sua senha:");
-            senha = Console.ReadLine();
-
-            cliente = _clienteRepository.ExisteNaBaseDeDados("Cliente", "email", email);
-
-            if (cliente == null)
+            
+            var opcao = AnsiConsole.Prompt(
+                new SelectionPrompt<(int Index, string Name)>()
+                    .AddChoices(new List<(int Index, string Name)>
+                    {
+                        (1, "Fazer login"),
+                        (2, "Ja tenho cadastro"),
+                        (0, "Voltar")
+                    })
+                    .UseConverter(a => a.Name)
+                    .HighlightStyle(new Style().Background(Color.DarkBlue).Foreground(Color.White))
+                    .Title("=== Menu do Usuário ===")
+            );
+            switch (opcao.Index)
             {
-                Console.WriteLine("E-mail não cadastrado!");
-                return null;
-            }
+                case 0:
+                    Console.Clear();
+                    break;
+                case 1:
+                    Console.Clear();
+                    string email, senha;
 
-            if (cliente.Senha != senha)
-            {
-                Console.WriteLine("Senha incorreta!");
-                return null;
-            }
+                    Console.WriteLine("Digite seu e-mail:");
+                    email = Console.ReadLine();
 
-            Console.WriteLine("Login bem-sucedido!");
+                    Console.WriteLine("Digite sua senha:");
+                    senha = Console.ReadLine();
+
+                    cliente = _clienteRepository.ExisteNaBaseDeDados("Cliente", "email", email);
+
+                    if (cliente == null)
+                    {
+                        Console.WriteLine("E-mail não cadastrado!");
+                        return null;
+                    }
+
+                    if (cliente.Senha != senha)
+                    {
+                        Console.WriteLine("Senha incorreta!");
+                        return null;
+                    }
+
+                    Console.WriteLine("Login bem-sucedido!");
+                    return cliente;
+                case 2:
+                    Console.Clear();
+                    cliente = inserirNovoCliente();
+                    return cliente; 
+            }
             return cliente;
         }
     }
