@@ -1,4 +1,6 @@
-﻿namespace AplicativoDeComida.Modelos
+﻿using AplicativoDeComida.Models;
+
+namespace AplicativoDeComida.Modelos
 {
     public class Pedido
     {
@@ -16,7 +18,9 @@
         public Restaurante Restaurante { get; set; }
 
         public List<ItemMenu> Menu { get; set; }
-      
+        public List<PedidoItemMenu> PedidosItensMenu { get; set; } // Alterada de Menu para PedidosItensMenu
+
+
     }
 
 }
