@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AplicativoDeComida")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1873b26f5b75991bca0a2721fa5e33bccf7507a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abd8b12a47c4b6a49724f736f91c8ce1ae5af7ca")]
 [assembly: System.Reflection.AssemblyProductAttribute("AplicativoDeComida")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AplicativoDeComida")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

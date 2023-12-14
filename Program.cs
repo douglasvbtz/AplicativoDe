@@ -65,7 +65,7 @@ namespace AplicativoDeComida
             }
             catch (MySqlConnector.MySqlException e)
             {
-                Console.WriteLine("Erro de SQL.");
+                Console.WriteLine("Erro de Conexao.");
             }
             catch (Exception ex)
             {
@@ -76,15 +76,19 @@ namespace AplicativoDeComida
         {
             while (true)
             {
-                clienteAtual = gerDeCliente.ValidarCliente();
-                if (clienteAtual != null)
+                if (clienteAtual == null)
                 {
+                    clienteAtual = gerDeCliente.ValidarCliente();
                     Console.Clear();
+                }
+                else
+                {
+                    // Console.Clear();
                     var opcao = AnsiConsole.Prompt(
                         new SelectionPrompt<(int Index, string Name)>()
                             .AddChoices(new List<(int Index, string Name)>
                             {
-                                (1, "Escolher restaurante"),
+                                (1, "Realizar pedido"),
                                 (2, "Ver pedidos"),
                                 (3, "Ver informações do usuário"),
                                 (0, "Voltar")
@@ -100,7 +104,6 @@ namespace AplicativoDeComida
                             return;
                         case 1:
                             Console.Clear();
-                            Restaurante restaurante = gerDeRestaurante.EscolherRestaurante();
                             // gerDePedidos.CriarPedido();
                             break;
                         case 2:
@@ -109,66 +112,56 @@ namespace AplicativoDeComida
                             break;
                         case 3:
                             Console.Clear();
-                            Console.WriteLine(
-                                $"ID: {clienteAtual.ClienteId}, Nome: {clienteAtual.Nome}, Email: {clienteAtual.Email}");
+                            Console.WriteLine($"ID: {clienteAtual.ClienteId}, Nome: {clienteAtual.Nome}, Email: {clienteAtual.Email}");
                             break;
                     }
                 }
             }
         }
 
-        // static void MenuTarefas(GerenciamentoDeRestaurante gerDeRestaurante, GerenciamentoDeItemMenu gerDeItemMenu)
-        // {
-        //     while (true)
-        //     {
-        //        var opcao = AnsiConsole.Prompt(
-        //             new SelectionPrompt<(int Index, string Name)>()
-        //                 .AddChoices( new List<(int Index, string Name)>
-        //                 {
-        //                     (0, "Voltar"),
-        //                     (1, "Adicionar Tarefa"),
-        //                     (2, "Alterar Tarefa"),
-        //                     (3, "Excluir tarefa"),
-        //                     (4, "Buscar tarefas"),
-        //                     (5, "Buscar tarefas por lista"),
-        //                     (6, "Concluir tarefas em lote")
-        //                 })
-        //                 .UseConverter(a => a.Name)
-        //                 .HighlightStyle(Color.Blue)
-        //                 .Title("=== Menu de Tarefas ===")
-        //         );
-        //         switch(opcao.Index)
-        //         {
-        //             case 0:
-        //                 Console.Clear();
-        //                 return;
-        //             case 1:
-        //                 Console.Clear();
-        //                 gerDeRestaurante.Add(context, clienteAtual);
-        //                 break;
-        //             case 2:
-        //                 Console.Clear();
-        //                 gerDeRestaurante.UpdateTarefa(context,gerDeRestaurante, gerDeItemMenu, clienteAtual);
-        //                 break;
-        //             case 3:
-        //                 Console.Clear();
-        //                 gerDeRestaurante.Delete(gerDeRestaurante, gerDeItemMenu, clienteAtual);
-        //                 break;
-        //             case 4:
-        //                 Console.Clear();
-        //                 gerDeRestaurante.GetAllTarefas(gerDeRestaurante, gerDeItemMenu, clienteAtual);
-        //                 break;
-        //             case 5:
-        //                 Console.Clear();
-        //                 gerDeRestaurante.GetTarefasPorLista(gerDeRestaurante, gerDeItemMenu, clienteAtual);
-        //                 break;
-        //             case 6:
-        //                 Console.Clear();
-        //                 gerDeRestaurante.AlterarStatusEmLote(gerDeRestaurante, gerDeItemMenu, clienteAtual, context);
-        //                 break;
-        //         }
-        //     }
-        // }
+        static void MenuTarefas(GerenciamentoDeRestaurante gerDeRestaurante, GerenciamentoDeItemMenu gerDeItemMenu)
+        {
+            while (true)
+            {
+               var opcao = AnsiConsole.Prompt(
+                    new SelectionPrompt<(int Index, string Name)>()
+                        .AddChoices( new List<(int Index, string Name)>
+                        {
+                            (1, "Cadastrar item no menu"),
+                            (2, "Alterar item no menu"),
+                            (3, "Excluir item do menu"),
+                            (4, "Ver itens"),
+                            (0, "Voltar")
+                        })
+                        .UseConverter(a => a.Name)
+                        .HighlightStyle(Color.Blue)
+                        .Title("=== Menu de Tarefas ===")
+                );
+                switch(opcao.Index)
+                {
+                    case 0:
+                        Console.Clear();
+                        return;
+                    case 1:
+                        Console.Clear();
+                        // gerDeRestaurante.Add(context, clienteAtual);
+                        break;
+                    case 2:
+                        Console.Clear();
+                        // gerDeRestaurante.UpdateTarefa(context,gerDeRestaurante, gerDeItemMenu, clienteAtual);
+                        break;
+                    case 3:
+                        Console.Clear();
+                        // gerDeRestaurante.Delete(gerDeRestaurante, gerDeItemMenu, clienteAtual);
+                        break;
+                    case 4:
+                        Console.Clear();
+                        // gerDeRestaurante.GetAllTarefas(gerDeRestaurante, gerDeItemMenu, clienteAtual);
+                        break;
+                }
+            }
+        }
+        
         //
         // static void MenuListas(GerenciamentoDeItemMenu gerDeItemMenu, DataContext? context)
         // {
